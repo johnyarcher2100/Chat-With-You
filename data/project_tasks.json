@@ -1,0 +1,384 @@
+{
+  "project": "Chat with Me - 社群聊天應用",
+  "description": "一個多平台社群聊天應用，具有 Apple 風格的 UI、先進的多提供商認證、即時消息、AI 輔助聊天、可自定義 AI 機器人、全面的好友管理和安全的支付系統。",
+  "tasks": [
+    {
+      "id": "1",
+      "name": "環境設置",
+      "description": "初始化項目環境，包括 Next.js、TypeScript、Tailwind CSS 和 Supabase 配置。",
+      "priority": "high",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "1.1",
+          "name": "初始化 Next.js 15 項目",
+          "description": "使用 TypeScript 創建 Next.js 15 項目。",
+          "status": "completed"
+        },
+        {
+          "id": "1.2",
+          "name": "配置 Tailwind CSS",
+          "description": "安裝和配置 Tailwind CSS。",
+          "status": "completed"
+        },
+        {
+          "id": "1.3",
+          "name": "設置 Supabase 環境",
+          "description": "創建 Supabase 項目並配置環境變量。",
+          "status": "completed"
+        },
+        {
+          "id": "1.4",
+          "name": "配置 UI 組件庫",
+          "description": "安裝和配置 Chakra UI 或 Shadcn UI。",
+          "status": "completed"
+        },
+        {
+          "id": "1.5",
+          "name": "設置 Expo 跨平台開發環境",
+          "description": "初始化 Expo 以處理 Android 和 iOS 構建。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "認證系統實現",
+      "description": "使用 Supabase 和第三方登錄選項（Facebook、Google、Apple）實現安全的用戶認證。",
+      "priority": "high",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "2.1",
+          "name": "實現 Supabase 認證",
+          "description": "設置 Supabase 認證並創建登錄/註冊頁面。",
+          "status": "completed"
+        },
+        {
+          "id": "2.2",
+          "name": "集成第三方登錄",
+          "description": "集成 Facebook、Google 和 Apple 登錄選項。",
+          "status": "completed"
+        },
+        {
+          "id": "2.3",
+          "name": "創建用戶配置文件管理",
+          "description": "實現用戶配置文件創建和編輯功能。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "數據庫設計和實現",
+      "description": "設計和實現數據庫架構，包括用戶、聊天、機器人模型。",
+      "priority": "high",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "3.1",
+          "name": "設計數據庫架構",
+          "description": "設計用戶、好友、消息、聊天、AI 互動、支付和媒體表。",
+          "status": "completed"
+        },
+        {
+          "id": "3.2",
+          "name": "創建 SQL 遷移腳本",
+          "description": "創建 SQL 遷移腳本並在 Supabase 上運行。",
+          "status": "completed"
+        },
+        {
+          "id": "3.3",
+          "name": "實現數據訪問層",
+          "description": "創建數據訪問層以與數據庫交互。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "使用 Cloudinary 集成文件存儲",
+      "description": "集成 Cloudinary 以處理頭像和聊天圖像。",
+      "priority": "medium",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "4.1",
+          "name": "設置 Cloudinary 帳戶",
+          "description": "創建 Cloudinary 帳戶並獲取 API 密鑰。",
+          "status": "completed"
+        },
+        {
+          "id": "4.2",
+          "name": "實現文件上傳功能",
+          "description": "創建文件上傳服務以與 Cloudinary API 交互。",
+          "status": "completed"
+        },
+        {
+          "id": "4.3",
+          "name": "實現文件下載功能",
+          "description": "創建文件下載服務以從 Cloudinary 獲取媒體。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "name": "AI 模型集成：deepseekAPI 和 OpenAI",
+      "description": "集成 deepseekAPI 和 OpenAI API 以提供 AI 輔助聊天功能。",
+      "priority": "high",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "5.1",
+          "name": "設置 AI API 密鑰",
+          "description": "獲取 deepseekAPI 和 OpenAI API 密鑰並配置環境變量。",
+          "status": "completed"
+        },
+        {
+          "id": "5.2",
+          "name": "實現 AI 服務層",
+          "description": "創建 AI 服務層以與 AI API 交互。",
+          "status": "completed"
+        },
+        {
+          "id": "5.3",
+          "name": "實現上下文感知建議",
+          "description": "實現上下文感知建議功能。",
+          "status": "completed"
+        },
+        {
+          "id": "5.4",
+          "name": "實現模擬回覆",
+          "description": "實現當一方不活躍時的模擬回覆功能。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "name": "使用 Realtime 和 WebSocket 實現即時聊天功能",
+      "description": "使用 Supabase Realtime 或 WebSocket 實現即時消息功能。",
+      "priority": "high",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "6.1",
+          "name": "設置 Realtime 或 WebSocket",
+          "description": "配置 Supabase Realtime 或 WebSocket 以實現即時消息。",
+          "status": "completed"
+        },
+        {
+          "id": "6.2",
+          "name": "實現消息發送功能",
+          "description": "創建消息發送功能。",
+          "status": "completed"
+        },
+        {
+          "id": "6.3",
+          "name": "實現消息接收功能",
+          "description": "創建消息接收功能。",
+          "status": "completed"
+        },
+        {
+          "id": "6.4",
+          "name": "實現離線緩存和同步",
+          "description": "實現離線緩存和消息同步功能。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "name": "AI 輔助功能：上下文感知建議和模擬回覆",
+      "description": "實現 AI 輔助聊天功能，包括上下文感知建議和模擬回覆。",
+      "priority": "medium",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "7.1",
+          "name": "設計 AI 輔助 UI",
+          "description": "設計 AI 輔助功能的用戶界面。",
+          "status": "completed"
+        },
+        {
+          "id": "7.2",
+          "name": "實現 AI 建議功能",
+          "description": "實現 AI 建議功能的前端和後端邏輯。",
+          "status": "completed"
+        },
+        {
+          "id": "7.3",
+          "name": "實現語調匹配功能",
+          "description": "實現語調匹配功能。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "name": "好友管理：搜索、QR 碼、通知",
+      "description": "實現好友管理系統，包括搜索、QR 碼和通知。",
+      "priority": "medium",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "8.1",
+          "name": "實現好友搜索功能",
+          "description": "創建通過 ID 或名稱搜索好友的功能。",
+          "status": "completed"
+        },
+        {
+          "id": "8.2",
+          "name": "實現 QR 碼生成功能",
+          "description": "為每個用戶創建唯一的 QR 碼。",
+          "status": "completed"
+        },
+        {
+          "id": "8.3",
+          "name": "實現好友請求通知",
+          "description": "創建好友請求通知系統。",
+          "status": "completed"
+        },
+        {
+          "id": "8.4",
+          "name": "實現好友列表管理",
+          "description": "創建好友列表管理功能。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "name": "自定義 AI 機器人：知識型、訂單型、自定義型",
+      "description": "實現自定義 AI 機器人系統，包括知識型、訂單型和自定義型機器人。",
+      "priority": "medium",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "9.1",
+          "name": "設計機器人系統架構",
+          "description": "設計機器人系統的架構。",
+          "status": "completed"
+        },
+        {
+          "id": "9.2",
+          "name": "實現知識型機器人",
+          "description": "創建知識型機器人功能。",
+          "status": "completed"
+        },
+        {
+          "id": "9.3",
+          "name": "實現訂單型機器人",
+          "description": "創建訂單型機器人功能。",
+          "status": "completed"
+        },
+        {
+          "id": "9.4",
+          "name": "為自定義型機器人預留空間",
+          "description": "為未來的自定義型機器人預留空間。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "name": "支付系統：AI 調用計量、街口支付、Line Pay",
+      "description": "實現支付系統，包括 AI 調用計量、街口支付和 Line Pay 集成。",
+      "priority": "high",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "10.1",
+          "name": "實現 AI 調用計量功能",
+          "description": "創建 AI 調用計量功能。",
+          "status": "completed"
+        },
+        {
+          "id": "10.2",
+          "name": "集成街口支付",
+          "description": "集成街口支付 API。",
+          "status": "completed"
+        },
+        {
+          "id": "10.3",
+          "name": "集成 Line Pay",
+          "description": "集成 Line Pay API。",
+          "status": "completed"
+        },
+        {
+          "id": "10.4",
+          "name": "實現餘額提醒功能",
+          "description": "創建餘額提醒功能。",
+          "status": "completed"
+        },
+        {
+          "id": "10.5",
+          "name": "實現自動充值功能",
+          "description": "創建自動充值功能。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "name": "管理界面：LLM 參數和 API 使用監控",
+      "description": "實現管理界面，用於配置 LLM 參數和監控 API 使用情況。",
+      "priority": "low",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "11.1",
+          "name": "設計管理界面",
+          "description": "設計管理界面的用戶界面。",
+          "status": "completed"
+        },
+        {
+          "id": "11.2",
+          "name": "實現 LLM 參數配置",
+          "description": "創建 LLM 參數配置功能。",
+          "status": "completed"
+        },
+        {
+          "id": "11.3",
+          "name": "實現 API 使用監控",
+          "description": "創建 API 使用監控功能。",
+          "status": "completed"
+        },
+        {
+          "id": "11.4",
+          "name": "實現用戶活動監控",
+          "description": "創建用戶活動監控功能。",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "name": "UI/UX：Apple 風格設計和多平台一致性",
+      "description": "實現 Apple 風格的設計和多平台一致性。",
+      "priority": "medium",
+      "status": "completed",
+      "subtasks": [
+        {
+          "id": "12.1",
+          "name": "創建全局樣式",
+          "description": "創建全局 CSS/TS 文件，包含白色背景、微妙陰影、圓角元素和清晰排版。",
+          "status": "completed"
+        },
+        {
+          "id": "12.2",
+          "name": "實現響應式設計",
+          "description": "確保應用在各種屏幕尺寸上都能正常顯示。",
+          "status": "completed"
+        },
+        {
+          "id": "12.3",
+          "name": "確保多平台一致性",
+          "description": "確保在 Web、Android 和 iOS 上的一致體驗。",
+          "status": "completed"
+        }
+      ]
+    }
+  ]
+}

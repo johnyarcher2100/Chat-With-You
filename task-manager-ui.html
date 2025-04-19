@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蝦米任務管理器</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2563eb;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .task {
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fff;
+        }
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .task-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #1e40af;
+        }
+        .task-priority {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .priority-high {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+        .priority-medium {
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+        .priority-low {
+            background-color: #ecfdf5;
+            color: #059669;
+        }
+        .subtasks {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        .subtask {
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            background-color: #f3f4f6;
+        }
+        .status {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        .status-pending {
+            background-color: #dbeafe;
+            color: #2563eb;
+        }
+        .status-in-progress {
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+        .status-completed {
+            background-color: #d1fae5;
+            color: #059669;
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        button:hover {
+            background-color: #1d4ed8;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .close {
+            float: right;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>蝦米任務管理器</h1>
+    
+    <div class="container">
+        <h2>專案概覽</h2>
+        <div id="project-info">
+            <p><strong>專案名稱：</strong> <span id="project-name">載入中...</span></p>
+            <p><strong>描述：</strong> <span id="project-description">載入中...</span></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>任務列表</h2>
+        <div id="tasks-container">
+            載入中...
+        </div>
+        
+        <div class="controls">
+            <button id="add-task-btn">新增任務</button>
+            <button id="refresh-btn">重新整理</button>
+            <button id="export-btn">匯出任務</button>
+        </div>
+    </div>
+
+    <!-- 新增任務的模態框 -->
+    <div id="add-task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-add-task">&times;</span>
+            <h2>新增任務</h2>
+            <form id="add-task-form">
+                <div class="form-group">
+                    <label for="task-name">任務名稱</label>
+                    <input type="text" id="task-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="task-description">任務描述</label>
+                    <textarea id="task-description" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="task-priority">優先級</label>
+                    <select id="task-priority">
+                        <option value="high">高</option>
+                        <option value="medium" selected>中</option>
+                        <option value="low">低</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subtasks">子任務（每行一個）</label>
+                    <textarea id="subtasks" rows="5" placeholder="子任務1&#10;子任務2&#10;子任務3"></textarea>
+                </div>
+                <button type="submit">新增</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 匯出任務的模態框 -->
+    <div id="export-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-export">&times;</span>
+            <h2>匯出任務</h2>
+            <div class="form-group">
+                <label for="export-format">格式</label>
+                <select id="export-format">
+                    <option value="json">JSON</option>
+                    <option value="markdown">Markdown</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="export-content">內容</label>
+                <textarea id="export-content" rows="15" readonly></textarea>
+            </div>
+            <button id="copy-export">複製到剪貼簿</button>
+        </div>
+    </div>
+
+    <script>
+        // 任務數據
+        let projectData = null;
+
+        // DOM 元素
+        const projectNameEl = document.getElementById('project-name');
+        const projectDescriptionEl = document.getElementById('project-description');
+        const tasksContainerEl = document.getElementById('tasks-container');
+        const addTaskBtn = document.getElementById('add-task-btn');
+        const refreshBtn = document.getElementById('refresh-btn');
+        const exportBtn = document.getElementById('export-btn');
+        const addTaskModal = document.getElementById('add-task-modal');
+        const closeAddTask = document.getElementById('close-add-task');
+        const addTaskForm = document.getElementById('add-task-form');
+        const exportModal = document.getElementById('export-modal');
+        const closeExport = document.getElementById('close-export');
+        const exportFormatSelect = document.getElementById('export-format');
+        const exportContentTextarea = document.getElementById('export-content');
+        const copyExportBtn = document.getElementById('copy-export');
+
+        // 載入任務數據
+        async function loadTasks() {
+            try {
+                const response = await fetch('data/project_tasks.json');
+                projectData = await response.json();
+                
+                // 更新專案信息
+                projectNameEl.textContent = projectData.project;
+                projectDescriptionEl.textContent = projectData.description;
+                
+                // 渲染任務列表
+                renderTasks();
+            } catch (error) {
+                console.error('載入任務失敗:', error);
+                tasksContainerEl.innerHTML = '<p>載入任務失敗，請重試。</p>';
+            }
+        }
+
+        // 渲染任務列表
+        function renderTasks() {
+            if (!projectData || !projectData.tasks) {
+                tasksContainerEl.innerHTML = '<p>沒有任務數據。</p>';
+                return;
+            }
+
+            let html = '';
+            projectData.tasks.forEach(task => {
+                const priorityClass = `priority-${task.priority.toLowerCase()}`;
+                const statusClass = `status-${task.status.toLowerCase()}`;
+                
+                html += `
+                    <div class="task" data-id="${task.id}">
+                        <div class="task-header">
+                            <div class="task-title">${task.id}. ${task.name}</div>
+                            <div class="task-priority ${priorityClass}">${task.priority}</div>
+                        </div>
+                        <div class="task-description">${task.description}</div>
+                        <div class="status ${statusClass}">${task.status}</div>
+                        
+                        <div class="subtasks">
+                            <h4>子任務：</h4>
+                            ${task.subtasks.map(subtask => `
+                                <div class="subtask" data-id="${subtask.id}">
+                                    ${subtask.id}. ${subtask.name}
+                                    <span class="status status-${subtask.status.toLowerCase()}">${subtask.status}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="controls">
+                            <button class="edit-task-btn" data-id="${task.id}">編輯</button>
+                            <button class="update-status-btn" data-id="${task.id}">更新狀態</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            tasksContainerEl.innerHTML = html;
+            
+            // 添加事件監聽器
+            document.querySelectorAll('.edit-task-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const taskId = btn.getAttribute('data-id');
+                    // TODO: 實現編輯任務功能
+                    alert(`編輯任務 ${taskId} 的功能尚未實現`);
+                });
+            });
+            
+            document.querySelectorAll('.update-status-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const taskId = btn.getAttribute('data-id');
+                    // TODO: 實現更新狀態功能
+                    alert(`更新任務 ${taskId} 狀態的功能尚未實現`);
+                });
+            });
+        }
+
+        // 添加新任務
+        function addTask(taskData) {
+            // 生成新的任務 ID
+            const newId = (Math.max(...projectData.tasks.map(t => parseInt(t.id))) + 1).toString();
+            
+            // 處理子任務
+            const subtasks = taskData.subtasks.map((name, index) => ({
+                id: `${newId}.${index + 1}`,
+                name,
+                description: `${name}`,
+                status: 'pending'
+            }));
+            
+            // 創建新任務對象
+            const newTask = {
+                id: newId,
+                name: taskData.name,
+                description: taskData.description,
+                priority: taskData.priority,
+                status: 'pending',
+                subtasks
+            };
+            
+            // 添加到任務列表
+            projectData.tasks.push(newTask);
+            
+            // 保存到文件
+            saveTasksToFile();
+            
+            // 重新渲染任務列表
+            renderTasks();
+        }
+
+        // 保存任務到文件
+        async function saveTasksToFile() {
+            try {
+                const response = await fetch('/save-tasks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(projectData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('保存任務失敗');
+                }
+                
+                console.log('任務已保存');
+            } catch (error) {
+                console.error('保存任務失敗:', error);
+                alert('保存任務失敗，請重試。');
+            }
+        }
+
+        // 匯出任務
+        function exportTasks(format) {
+            if (format === 'json') {
+                return JSON.stringify(projectData, null, 2);
+            } else if (format === 'markdown') {
+                let markdown = `# ${projectData.project}\n\n`;
+                markdown += `${projectData.description}\n\n`;
+                
+                projectData.tasks.forEach(task => {
+                    markdown += `## ${task.id}. ${task.name} (${task.priority}, ${task.status})\n\n`;
+                    markdown += `${task.description}\n\n`;
+                    
+                    markdown += `### 子任務：\n\n`;
+                    task.subtasks.forEach(subtask => {
+                        markdown += `- ${subtask.id}. ${subtask.name} (${subtask.status})\n`;
+                    });
+                    
+                    markdown += '\n';
+                });
+                
+                return markdown;
+            }
+            
+            return '';
+        }
+
+        // 事件監聽器
+        document.addEventListener('DOMContentLoaded', () => {
+            // 載入任務
+            loadTasks();
+            
+            // 新增任務按鈕
+            addTaskBtn.addEventListener('click', () => {
+                addTaskModal.style.display = 'flex';
+            });
+            
+            // 關閉新增任務模態框
+            closeAddTask.addEventListener('click', () => {
+                addTaskModal.style.display = 'none';
+            });
+            
+            // 提交新增任務表單
+            addTaskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('task-name').value;
+                const description = document.getElementById('task-description').value;
+                const priority = document.getElementById('task-priority').value;
+                const subtasksText = document.getElementById('subtasks').value;
+                const subtasks = subtasksText.split('\n').filter(line => line.trim() !== '');
+                
+                addTask({
+                    name,
+                    description,
+                    priority,
+                    subtasks
+                });
+                
+                // 重置表單並關閉模態框
+                addTaskForm.reset();
+                addTaskModal.style.display = 'none';
+            });
+            
+            // 重新整理按鈕
+            refreshBtn.addEventListener('click', loadTasks);
+            
+            // 匯出按鈕
+            exportBtn.addEventListener('click', () => {
+                const format = exportFormatSelect.value;
+                const content = exportTasks(format);
+                exportContentTextarea.value = content;
+                exportModal.style.display = 'flex';
+            });
+            
+            // 關閉匯出模態框
+            closeExport.addEventListener('click', () => {
+                exportModal.style.display = 'none';
+            });
+            
+            // 匯出格式變更
+            exportFormatSelect.addEventListener('change', () => {
+                const format = exportFormatSelect.value;
+                const content = exportTasks(format);
+                exportContentTextarea.value = content;
+            });
+            
+            // 複製匯出內容
+            copyExportBtn.addEventListener('click', () => {
+                exportContentTextarea.select();
+                document.execCommand('copy');
+                alert('已複製到剪貼簿');
+            });
+            
+            // 點擊模態框外部關閉
+            window.addEventListener('click', (e) => {
+                if (e.target === addTaskModal) {
+                    addTaskModal.style.display = 'none';
+                }
+                if (e.target === exportModal) {
+                    exportModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

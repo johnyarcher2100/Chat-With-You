@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+:root {
+  /* 基本顏色 */
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Apple 風格顏色 */
+  --apple-blue: #007AFF;
+  --apple-green: #34C759;
+  --apple-indigo: #5856D6;
+  --apple-orange: #FF9500;
+  --apple-pink: #FF2D55;
+  --apple-purple: #AF52DE;
+  --apple-red: #FF3B30;
+  --apple-teal: #5AC8FA;
+  --apple-yellow: #FFCC00;
+
+  /* 灰階顏色 */
+  --apple-gray-1: #8E8E93;
+  --apple-gray-2: #AEAEB2;
+  --apple-gray-3: #C7C7CC;
+  --apple-gray-4: #D1D1D6;
+  --apple-gray-5: #E5E5EA;
+  --apple-gray-6: #F2F2F7;
+
+  /* 陰影 */
+  --apple-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --apple-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.03);
+  --apple-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.04), 0 4px 6px rgba(0, 0, 0, 0.02);
+
+  /* 圓角 */
+  --apple-radius-sm: 6px;
+  --apple-radius-md: 8px;
+  --apple-radius-lg: 12px;
+  --apple-radius-xl: 16px;
+  --apple-radius-full: 9999px;
+
+  /* 動畫 */
+  --apple-transition-fast: 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --apple-transition-medium: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --apple-transition-slow: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* 磨砂玻璃效果 */
+  --apple-blur-sm: 5px;
+  --apple-blur-md: 10px;
+  --apple-blur-lg: 20px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* 主題顏色映射 */
+  --color-primary: var(--apple-blue);
+  --color-success: var(--apple-green);
+  --color-warning: var(--apple-yellow);
+  --color-error: var(--apple-red);
+  --color-info: var(--apple-teal);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+
+    /* 深色模式下的陰影調整 */
+    --apple-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --apple-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.15);
+    --apple-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* 全局樣式 */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Apple 風格滾動條 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--apple-gray-3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--apple-gray-2);
+}
+
+/* 磨砂玻璃效果類 */
+.apple-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(var(--apple-blur-md));
+  -webkit-backdrop-filter: blur(var(--apple-blur-md));
+}
+
+.apple-glass-dark {
+  background: rgba(30, 30, 30, 0.7);
+  backdrop-filter: blur(var(--apple-blur-md));
+  -webkit-backdrop-filter: blur(var(--apple-blur-md));
+}
+
+/* 禁用文本選擇 */
+.apple-no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* 平滑過渡 */
+.apple-transition {
+  transition: all var(--apple-transition-medium);
+}

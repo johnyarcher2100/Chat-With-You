@@ -1,0 +1,12 @@
+flowchart TD
+    A[Project Initialization and Architecture Design] --> B[Authentication System: Supabase and Third Party Login]
+    B --> C[Database Design: User, Chat, Robot Models]
+    C --> D[File Storage Integration using Cloudinary]
+    D --> E[AI Model Integration: deepseekAPI and OpenAI]
+    E --> F[Real-time Chat Functionality with Realtime and WebSocket]
+    F --> G[AI Assistance Features: Context-aware Suggestions and Simulated Replies]
+    G --> H[Friend Management: Search, QR Code, Notifications]
+    H --> I[Custom AI Bots: Knowledge, Order, Custom Bots]
+    I --> J[Payment System: AI Call Metering, 街口支付, Line Pay]
+    J --> K[Admin Interface: LLM Parameters and API Usage Monitoring]
+    K --> L[UI/UX: Apple Inspired Design and Multi-platform Consistency]

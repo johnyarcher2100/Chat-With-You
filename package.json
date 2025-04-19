@@ -1,0 +1,31 @@
+{
+  "name": "chat-with-you-1",
+  "version": "1.0.0",
+  "description": "聊天應用與導入驗證器",
+  "main": "index.js",
+  "scripts": {
+    "validate-imports": "node import-validator.js ./chat-with-me",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.10.1",
+    "@radix-ui/react-dropdown-menu": "^2.1.10",
+    "@smithery/sdk": "^1.0.4",
+    "cloudinary": "^2.6.0",
+    "cloudinary-react": "^1.8.1",
+    "glob": "^8.1.0",
+    "next-cloudinary": "^6.16.0",
+    "react-icons": "^5.5.0",
+    "typescript": "^5.0.4"
+  },
+  "keywords": [
+    "chat",
+    "typescript",
+    "validation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
+  }
+}
