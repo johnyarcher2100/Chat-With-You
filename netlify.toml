@@ -1,13 +1,14 @@
 [build]
   base = "chat-with-me/"
   publish = "chat-with-me/.next/"
-  command = "npm run build"
+  command = "npm ci --legacy-peer-deps --force && npm run build"
 
 [build.environment]
   NODE_VERSION = "20.15.0"
   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME = "dbusoeqfk"
   PYTHON_VERSION = "3.11.0"
   RUBY_VERSION = "3.2.0"
+  NPM_FLAGS = "--legacy-peer-deps --force"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
