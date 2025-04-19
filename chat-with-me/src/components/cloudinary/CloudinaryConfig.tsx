@@ -1,6 +1,6 @@
 'use client';
 
-import { CloudinaryContext } from 'cloudinary-react';
+import { CloudinaryContext } from '@cloudinary/react';
 import { CLOUDINARY_CLOUD_NAME } from '@/config/env';
 
 interface CloudinaryConfigProps {
