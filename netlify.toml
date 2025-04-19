@@ -1,0 +1,17 @@
+[build]
+  base = "chat-with-me/"
+  publish = "chat-with-me/.next/"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "20.2.1"
+  NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME = "dbusoeqfk"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# 注意：不要在此文件中包含敏感信息，如 API 密鑰和密碼
+# 請在 Netlify 管理控制台中設置以下環境變數：
+# CLOUDINARY_URL
+# CLOUDINARY_API_KEY
+# CLOUDINARY_API_SECRET 
